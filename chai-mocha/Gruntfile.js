@@ -10,7 +10,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     mochaTest: {
      options: {
-	     ui: 'tdd'
+	     ui: 'tdd', 
+       reporter: 'nyan'
      }, 
      test: {
         src: ['test/**/*.js']
@@ -38,7 +39,7 @@ module.exports = function (grunt) {
       },
       lib: {
         files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'mochaTest']
+        tasks: [ 'mochaTest']
       },
       test: {
         files: '<%= jshint.test.src %>',
@@ -51,6 +52,6 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'mochaTest']);
+  grunt.registerTask('default', ['mochaTest']);
 
 };

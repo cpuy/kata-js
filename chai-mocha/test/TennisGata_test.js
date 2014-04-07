@@ -1,8 +1,5 @@
 'use strict';
 
-var tenniskata = require('../lib/tennis-kata.js');
-require('chai').should();
-
 /*
   ======== A Handy Little Mocha Reference ========
   https://github.com/visionmedia/mocha/
@@ -27,19 +24,25 @@ require('chai').should();
     - better-assert
 */
 
-var assert = require('assert');
+var TennisGame = require('../lib/TennisGame.js');
+var Score = require('../lib/Score.js');
+require('chai').should();
 
-suite('AwesomenessTest', function(){
-  test('#awesome()', function(done){
-    assert.equal(tenniskata.awesome(), 'awesome');
+suite('tennis game suite', function(){
+ 
+  test('new game should start with Love/Love score', function(done){
+    var game = new TennisGame();
+    game.score.should.be.deep.equal(new Score(0, 0));
     done();
   });
   
-  test('#userOneWinBall()', function(done){
-    var win = tenniskata.userOneWinBall();
-    win.should.have.property('playerOneScore').equal(15);
-    win.should.have.property('playerTwoScore').equal(0);
-    win.should.be.deep.equal({ playerOneScore: 15, playerTwoScore: 0  });
+  test('new game should start with Love/Love score', function(done){
+    var game = new TennisGame();
+    
+    game.playerOneWinBall().playerOneWinBall().playerOneWinBall();
+    game.playerTwoWinBall().playerTwoWinBall().playerTwoWinBall();
+    
+    game.score.should.be.deep.equal(new Score('DEUCE', 'DEUCE'));
     done();
   });
   
