@@ -9,23 +9,33 @@
 
 'use strict';
 
+var tennisPoint = {
+    love: 0,
+    fifteen: 15,
+    thirty: 30,
+    fourty: 40,
+    deuce: 'DEUCE',
+    advantage: 'ADVANTAGE',
+    win: 'WIN'
+};
+
 function incrementPoints(playerPoints) {
-    if (playerPoints === 0) {
-        return 15;
-    } else if (playerPoints === 15) {
-        return 30;
-    } else if (playerPoints === 30) {
-        return 40;
-    } else if (playerPoints === 40 || playerPoints === 'ADVANTAGE') {
-        return 'WIN';
+    if (playerPoints === tennisPoint.love) {
+        return tennisPoint.fifteen;
+    } else if (playerPoints === tennisPoint.fifteen) {
+        return tennisPoint.thirty;
+    } else if (playerPoints === tennisPoint.thirty) {
+        return tennisPoint.fourty;
+    } else if (playerPoints === tennisPoint.fourty || playerPoints === tennisPoint.advantage) {
+        return tennisPoint.win;
     } else {
-        return 'ADVANTAGE';
+        return tennisPoint.advantage;
     }
 }
 
 var Game = function (playerOnePoints, playerTwoPoints) {
-    this.playerOnePoints = playerOnePoints || 0;
-    this.playerTwoPoints = playerTwoPoints || 0;
+    this.playerOnePoints = playerOnePoints || tennisPoint.love;
+    this.playerTwoPoints = playerTwoPoints || tennisPoint.love;
 };
 
 Game.prototype.isDeuce = function () {
@@ -35,14 +45,14 @@ Game.prototype.isDeuce = function () {
         return (that.playerOnePoints === points && that.playerTwoPoints === points);
     }
 
-    return bothHave(40) || bothHave('DEUCE') || bothHave('ADVANTAGE');
+    return bothHave(tennisPoint.fourty) || bothHave(tennisPoint.deuce) || bothHave(tennisPoint.advantage);
 };
 
 Game.prototype.playerOneWinBall = function () {
     this.playerOnePoints = incrementPoints(this.playerOnePoints);
     if (this.isDeuce()) {
-        this.playerOnePoints = 'DEUCE';
-        this.playerTwoPoints = 'DEUCE';
+        this.playerOnePoints = tennisPoint.deuce;
+        this.playerTwoPoints = tennisPoint.deuce;
     }
     return this;
 };
@@ -50,8 +60,8 @@ Game.prototype.playerOneWinBall = function () {
 Game.prototype.playerTwoWinBall = function () {
     this.playerTwoPoints = incrementPoints(this.playerTwoPoints);
     if (this.isDeuce()) {
-        this.playerOnePoints = 'DEUCE';
-        this.playerTwoPoints = 'DEUCE';
+        this.playerOnePoints = tennisPoint.deuce;
+        this.playerTwoPoints = tennisPoint.deuce;
     }
     return this;
 };
