@@ -110,4 +110,22 @@ suite('tennis game suite :', function () {
         done();
     });
 
+    test('player win the game if he has ADVANTAGE and he win the ball', function (done) {
+        var game = new TennisGame('ADVANTAGE', 'DEUCE');
+
+        game.playerOneWinBall();
+
+        game.playerOnePoints.should.be.equals('WIN');
+        done();
+    });
+
+    test('player win the game if he has 40 and he win the ball', function (done) {
+        var game = new TennisGame(15, 40);
+
+        game.playerTwoWinBall();
+
+        game.playerTwoPoints.should.be.equals('WIN');
+        done();
+    });
+
 });

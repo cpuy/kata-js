@@ -16,6 +16,8 @@ function incrementPoints(playerPoints) {
         return 30;
     } else if (playerPoints === 30) {
         return 40;
+    } else if (playerPoints === 40 || playerPoints === 'ADVANTAGE') {
+        return 'WIN';
     } else {
         return 'ADVANTAGE';
     }
