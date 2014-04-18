@@ -1,16 +1,28 @@
 var Grid = function (nbColumn, nbRows) {
     this.nbColumn = nbColumn;
     this.nbRows = nbRows;
+    this.cells = buildCells(nbColumn, nbRows);
 
-    this.cells = [];
-    for (var i = 0; i < nbColumn; i++) {
-        var row = [];
-        for (var j = 0; j < nbRows; j++) {
-            row[j] = {alive: false};
+    function buildCells(nbColumn, nbRows)  {
+        var cells = [], row = [];
+        for (var i = 0; i < nbColumn; i++) {
+            var row = [];
+            for (var j = 0; j < nbRows; j++) {
+                row[j] = {alive: false};
+            }
+            cells[i] = row;
         }
-        this.cells[i] = row;
-    }
+        return cells;
+    };
 }
+
+Grid.prototype.isAlive = function(column, row) {
+    return this.cells[column][row].alive;
+};
+
+Grid.prototype.giveLife = function(column, row) {
+    this.cells[column][row].alive = true;
+};
 
 Grid.prototype.nextGeneration = function () {
     return new Grid(this.nbColumn, this.nbRows);
@@ -38,10 +50,21 @@ describe('a cell', function() {
 
     it('should die if it has fewer than two live neighbours, as if caused by underpopulation', function() {
         var grid = new Grid(2, 2);
-        grid.cells[1][1].alive = true;
+        grid.giveLife(1, 1);
 
         grid = grid.nextGeneration();
 
-        expect(grid.cells[1][1].alive).toBeFalsy;
+        expect(grid.isAlive(1, 1)).toBeFalsy;
+    });
+
+    it('should live if it has more than one live neighbours', function() {
+        var grid = new Grid(2, 2);
+        grid.giveLife(1, 1);
+        grid.giveLife(1, 2);
+        grid.giveLife(2, 1);
+
+        grid = grid.nextGeneration();
+
+        expect(grid.isAlive(1, 1)).toBeTruthy;
     });
 });
