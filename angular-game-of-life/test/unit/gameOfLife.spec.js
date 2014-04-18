@@ -13,5 +13,7 @@ describe('grid', function()  {
         expect(grid.nbRows).toBe(8);
     });
 
-
+    it('should be created with dead cells', function() {
+        // TODO
+    });
 });
