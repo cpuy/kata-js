@@ -13,11 +13,13 @@
 
 <div ng-controller="GridCtrl">
     <table class="grid">
-        <tr ng-repeat="row in grid">
+        <tr ng-repeat="row in grid.cells">
             <td ng-repeat="cell in row" ng-click="toggleLife(cell)" class="cell" ng-class="{ alive: cell.alive}" />
         </tr>
     </table>
+    <button ng-click="nextGeneration()">Go</button>
 </div>
+
 
 
 <!-- In production use:

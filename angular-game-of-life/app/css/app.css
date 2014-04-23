@@ -36,6 +36,10 @@ table.grid {
     margin: auto;
 }
 
+table.grid th, td {
+    border: 1px solid black;
+}
+
 .cell{
     cursor: pointer;
     width: 40px;
