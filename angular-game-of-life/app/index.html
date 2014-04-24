@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>My AngularJS App</title>
     <link rel="stylesheet" href="css/app.css"/>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -11,13 +12,13 @@
     <h1>Game Of Life</h1>
 </header>
 
-<div ng-controller="GridCtrl">
+<div class="content" ng-controller="GridCtrl">
+    <button type="button" class="btn btn-default" ng-click="nextGeneration()">Launch simulation</button>
     <table class="grid">
         <tr ng-repeat="row in grid.cells">
             <td ng-repeat="cell in row" ng-click="toggleLife(cell)" class="cell" ng-class="{ alive: cell.alive}" />
         </tr>
     </table>
-    <button ng-click="nextGeneration()">Go</button>
 </div>
 
 

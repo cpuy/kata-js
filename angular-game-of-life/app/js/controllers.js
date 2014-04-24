@@ -82,7 +82,7 @@ Grid.prototype.nextGeneration = function () {
 };
 
 angular.module('myApp.controllers', [])
-  .controller('GridCtrl', [ '$scope', 'grid', function($scope, grid) {
+  .controller('GridCtrl', [ '$scope', '$timeout', 'grid', function($scope, $timeout, grid) {
         $scope.grid = grid;
 
         $scope.toggleLife = function(cell) {
@@ -90,7 +90,14 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.nextGeneration = function() {
-            $scope.grid = $scope.grid.nextGeneration();
+            loop();
         };
+
+        function loop(delay) {
+            $timeout(function() {
+                $scope.grid = $scope.grid.nextGeneration();
+                $timeout(loop, 300);
+            }, 300);
+        }
   }])
   .service('grid', Grid);
