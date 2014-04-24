@@ -32,8 +32,7 @@ Grid.prototype.nextGeneration = function () {
     var cell;
     for (var i = 0; i< this.nbRows; i++) {
         for (var j = 0; j< this.nbColumn; j++) {
-            var neihboors = getNeighboors(i, j);
-            var count = countAlive(neihboors);
+            var count = countAliveNeighbors(i, j);
             if (this.cells[i][j].alive) {
 
                 if (count === 2 || count === 3) {
@@ -48,44 +47,37 @@ Grid.prototype.nextGeneration = function () {
     }
     return newGrid;
 
-
-    function countAlive(cells) {
+    function countAliveNeighbors(i, j) {
         var count = 0;
-          for (var i = 0; i <cells.length; i++) {
-              if (cells[i].alive) {
-                  count += 1;
-              }
-          }
+        if (that.cells[i-1]) {
+            if (that.cells[i-1][j] && that.cells[i-1][j].alive) {
+                count += 1;
+            }
+            if (that.cells[i-1][j-1] && that.cells[i-1][j-1].alive) {
+                count += 1;
+            }
+            if (that.cells[i-1][j+1] && that.cells[i-1][j+1].alive) {
+                count += 1;
+            }
+        }
+        if (that.cells[i+1]) {
+            if (that.cells[i+1][j] && that.cells[i+1][j].alive) {
+                count += 1;
+            }
+            if (that.cells[i+1][j+1] && that.cells[i+1][j+1].alive) {
+                count += 1;
+            }
+            if (that.cells[i+1][j-1] && that.cells[i+1][j-1].alive) {
+                count += 1;
+            }
+        }
+        if (that.cells[i][j+1] && that.cells[i][j+1].alive) {
+            count += 1;
+        }
+        if (that.cells[i][j-1] && that.cells[i][j-1].alive) {
+            count += 1;
+        }
         return count;
-    }
-
-    function getNeighboors(i, j) {
-        var n = [];
-        if (i != 0) {
-            n.push(that.cells[i-1][j]);
-            if (j != 0) {
-                n.push(that.cells[i-1][j-1])
-            }
-        }
-        if (i != that.nbRows - 1) {
-            n.push(that.cells[i+1][j]);
-            if (j != that.nbColumn - 1) {
-                n.push(that.cells[i+1][j+1]);
-            }
-        }
-        if (j != 0) {
-            n.push(that.cells[i][j-1]);
-            if (i!= 0) {
-                n.push(that.cells[i-1][j-1]);
-            }
-        }
-        if (j != that.nbColumn - 1) {
-            n.push(that.cells[i][j+1]);
-            if (i!= that.nbRows - 1) {
-                n.push(that.cells[i+1][j+1]);
-            }
-        }
-        return n;
     }
 };
 
