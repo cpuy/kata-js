@@ -1,21 +1,32 @@
-var fizzbuzzer = {
+var fizzbuzzer = function () {
 
-    fizzbuzz: function (number) {
+    var FIZZ = 3;
+    var BUZZ = 7
 
-        function contains(number, contained) {
-            return number.toString().indexOf(contained) >= 0;
-        }
-
-        function isFizz(number) {
-            return (contains(number, '3') || number % 3 == 0)
-        };
-
-        if (isFizz(number)) {
-            return 'Fizz';
-        }
-        if (contains(number, '7')) {
-            return 'Buzz';
-        }
-        return number.toString();
+    function contains(number, contained) {
+        return number.toString().indexOf(contained) >= 0;
     }
-};
+
+    function should(fizzOrBuzz, number) {
+        return (contains(number, fizzOrBuzz.toString()) || isMultipleOf(number, fizzOrBuzz))
+    };
+
+    function isMultipleOf(number, diviser) {
+        return number % diviser == 0;
+    }
+    
+    return {
+
+        fizzbuzz: function (number) {
+
+            if (should(FIZZ, number)) {
+                return 'Fizz';
+            }
+
+            if (should(BUZZ, number)) {
+                return 'Buzz';
+            }
+            return number.toString();
+        }
+    }
+}();

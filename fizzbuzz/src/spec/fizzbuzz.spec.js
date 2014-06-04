@@ -27,5 +27,11 @@
 
             expect(number).toBe('Buzz');
         });
+
+        it('should return Buzz when the given number is a multiple of 7', function () {
+            var number = fizzbuzzer.fizzbuzz(28);
+
+            expect(number).toBe('Buzz');
+        });
     });
 })();
