@@ -21,5 +21,11 @@
 
             expect(number).toBe('Fizz');
         });
+
+        it('should return Buzz when the given number contains a 7', function () {
+            var number = fizzbuzzer.fizzbuzz(778);
+
+            expect(number).toBe('Buzz');
+        });
     });
 })();
