@@ -28,10 +28,10 @@
             expect(number).toBe('Buzz');
         });
 
-        it('should return Buzz when the given number is a multiple of 7', function () {
-            var number = fizzbuzzer.fizzbuzz(28);
+        it('should return FizzBuzz when the given number is Fizz and Buzz', function () {
+            var number = fizzbuzzer.fizzbuzz(37);
 
-            expect(number).toBe('Buzz');
+            expect(number).toBe('FizzBuzz');
         });
     });
 })();
